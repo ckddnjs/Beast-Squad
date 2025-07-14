@@ -28,14 +28,18 @@ public class Cat : MonoBehaviour
         {
             if(!isFollowingplayStick && followCoroutine == null)
             {
+                // 코루틴 실행이 Coroutine의 객체가 할당됨 이후 아래 DelayAndFollow 안에 null 이 다시 대입
                 followCoroutine = StartCoroutine(DelayAndFollow());
             }
         }
-        else
+        else // 내적이 일직석이 아닐때
         {
-             if(isFollowingplayStick)
+            if (isFollowingplayStick)
             {
                 isFollowingplayStick = false;
+            }
+            if (followCoroutine != null)
+            {
                 StopCoroutine(followCoroutine);
                 followCoroutine = null;
             }
