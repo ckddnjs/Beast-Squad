@@ -37,6 +37,7 @@ public class Cat : MonoBehaviour
             if (isFollowingplayStick)
             {
                 isFollowingplayStick = false;
+                
             }
             if (followCoroutine != null)
             {
@@ -55,6 +56,7 @@ public class Cat : MonoBehaviour
     {
         yield return new WaitForSeconds(followDelay);
         isFollowingplayStick = true;
+        
         followCoroutine = null;
     }
 }
