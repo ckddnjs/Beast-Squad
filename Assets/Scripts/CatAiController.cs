@@ -298,6 +298,9 @@ public class CatAiController : MonoBehaviour
             lastFleeDir = fleeDir.normalized;
             return lastFleeDir;
         }
+
+        //임시 추가
+        return new Vector2();
     }
 }
 
