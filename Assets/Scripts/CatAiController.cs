@@ -15,7 +15,7 @@ public class CatAiController : MonoBehaviour
     public float angleWithplayStick;
     public float followDelay;
     public GameObject Goal;
-    public List<GameObject> monsters; // ¸ó½ºÅÍ °ü¸® ¸®½ºÆ® µû·Î »©¼­ ¸¸µé¾î¾ßÇÔ. °ÔÀÓ ¸Å´ÏÀú, ³ªÁß¿¡ Layer »ç¿ë
+    public List<GameObject> monsters; // ëª¬ìŠ¤í„° ê´€ë¦¬ ë¦¬ìŠ¤íŠ¸ ë”°ë¡œ ë¹¼ì„œ ë§Œë“¤ì–´ì•¼í•¨. ê²Œì„ ë§¤ë‹ˆì €, ë‚˜ì¤‘ì— Layer ì‚¬ìš©
     public float catDetectRadius;
     public float catFleeTime;
     private float catFleeTimer;
@@ -36,15 +36,15 @@ public class CatAiController : MonoBehaviour
         AttackByMonsterWithPlayer,
         StickCheck
     };
-    // StartMove : °ÔÀÓ ½ÃÀÛ½Ã, 0, ½ÃÀÛÇÏ°í ³ª¼­ Idle·Î »óÅÂ º¯È­
-    // ToPlayer : ÇÃ·¹ÀÌ¾î¿¡°Ô °¡±îÀÌ ºÙ¾ùÀ»½Ã, 1, Flee °¡´É
-    // Idle : Àá±ñ ¸ØÃß¾î µÎ¸®¹ø °Å¸®´À°Í, 2, Flee °¡´É
-    // Wander ; ¸ñÀûÁö¸¦ ÇâÇØ ÀÌµ¿, 3, Flee °¡´É
-    // Flee : ¸ó½ºÅÍ·Î ºÎÅÍ µµ¸ÁÄ¥½Ã, 4
-    // GoalReached :  ¸ñÀûÁö µµ´Ş½Ã, 5
-    // CatchToPlayer : ÇÃ·¹ÀÌ¾î¿¡°Ô ÀâÇûÀ»¶§, 6, ¿¹¿Ü·Î ÇÃ·¹ÀÌ¾î°¡ °ø°İ ¹ŞÀ¸¸é µµ¸Á°¡´Â Á¶°ÇÀ¸·Î(Á¶°Ç Ãß°¡)
-    // AttackByMonsterWithPlayer : ÇÃ·¹ÀÌ¾î¿¡°Ô ¾È°å´Âµ¥ ¸ó½ºÅÍ °ø°İÀ» ¹Ş¾ÒÀ»¶§, 7
-    // StickCheck : °í¾çÀÌ°¡ ÇÃ·¹ÀÌ¾îÀÇ ³¬½Ë´ë¸¦ ±¸º°ÇÏ´Â ÅÒ, 8, Flee °¡´É
+    // StartMove : ê²Œì„ ì‹œì‘ì‹œ, 0, ì‹œì‘í•˜ê³  ë‚˜ì„œ Idleë¡œ ìƒíƒœ ë³€í™”
+    // ToPlayer : í”Œë ˆì´ì–´ì—ê²Œ ê°€ê¹Œì´ ë¶™ì—‡ì„ì‹œ, 1, Flee ê°€ëŠ¥
+    // Idle : ì ê¹ ë©ˆì¶”ì–´ ë‘ë¦¬ë²ˆ ê±°ë¦¬ëŠê²ƒ, 2, Flee ê°€ëŠ¥
+    // Wander ; ëª©ì ì§€ë¥¼ í–¥í•´ ì´ë™, 3, Flee ê°€ëŠ¥
+    // Flee : ëª¬ìŠ¤í„°ë¡œ ë¶€í„° ë„ë§ì¹ ì‹œ, 4
+    // GoalReached :  ëª©ì ì§€ ë„ë‹¬ì‹œ, 5
+    // CatchToPlayer : í”Œë ˆì´ì–´ì—ê²Œ ì¡í˜”ì„ë•Œ, 6, ì˜ˆì™¸ë¡œ í”Œë ˆì´ì–´ê°€ ê³µê²© ë°›ìœ¼ë©´ ë„ë§ê°€ëŠ” ì¡°ê±´ìœ¼ë¡œ(ì¡°ê±´ ì¶”ê°€)
+    // AttackByMonsterWithPlayer : í”Œë ˆì´ì–´ì—ê²Œ ì•ˆê²¼ëŠ”ë° ëª¬ìŠ¤í„° ê³µê²©ì„ ë°›ì•˜ì„ë•Œ, 7
+    // StickCheck : ê³ ì–‘ì´ê°€ í”Œë ˆì´ì–´ì˜ ë‚šì‹¯ëŒ€ë¥¼ êµ¬ë³„í•˜ëŠ” í…€, 8, Flee ê°€ëŠ¥
 
     public CatState currentState = CatState.StartMove;
 
@@ -87,12 +87,12 @@ public class CatAiController : MonoBehaviour
                 break;
 
             case CatState.Idle:
-                // Idle »óÅÂ ÀÛ¼º
+                // Idle ìƒíƒœ ì‘ì„±
                 TryStickCheck(dot);
                 break;
 
             case CatState.Wander:
-                // ÇÃ·¹ÀÌ¾î ¹æÇâ°ú ¹İ´ëÀÌ¸é¼­ ¸ñÇ¥¹°À» ÇâÇØ ÀÌµ¿ÇÏ´Â ÄÚµå(³ªÁß¿¡ ¸Ê¿¡ µû¸¥ º¯°æÁ¡ Ãß°¡)
+                // í”Œë ˆì´ì–´ ë°©í–¥ê³¼ ë°˜ëŒ€ì´ë©´ì„œ ëª©í‘œë¬¼ì„ í–¥í•´ ì´ë™í•˜ëŠ” ì½”ë“œ(ë‚˜ì¤‘ì— ë§µì— ë”°ë¥¸ ë³€ê²½ì  ì¶”ê°€)
                 TryStickCheck(dot);
                 break;
 
@@ -124,7 +124,7 @@ public class CatAiController : MonoBehaviour
                 catFleeTimer -= Time.deltaTime;
                 if (DetectMonsters())
                 {
-                    // ¸ó½ºÅÍ°¡ °¨ÁöµÇ¸é ÃÖ¼Ò À¯Áö ½Ã°£ º¸Àå ???
+                    // ëª¬ìŠ¤í„°ê°€ ê°ì§€ë˜ë©´ ìµœì†Œ ìœ ì§€ ì‹œê°„ ë³´ì¥ ???
                     catFleeTimer = Mathf.Max(catFleeTimer, 0.15f);
                 }
                 if (catFleeTimer <= 0f && !DetectMonsters())
@@ -134,15 +134,15 @@ public class CatAiController : MonoBehaviour
                 break;
 
             case CatState.CatchToPlayer:
-                // ÇÃ·¹ÀÌ¾îÇÑÅ× ÀâÈ÷¸é ÇÃ·¹ÀÌ¾î Ç°¼ÓÀ» µû¶ó´Ù´Ï´Â ÄÚµå
+                // í”Œë ˆì´ì–´í•œí…Œ ì¡íˆë©´ í”Œë ˆì´ì–´ í’ˆì†ì„ ë”°ë¼ë‹¤ë‹ˆëŠ” ì½”ë“œ
                 break;
 
             case CatState.AttackByMonsterWithPlayer:
-                // ÇÃ·¹ÀÌ¾îÇÑÅ× ÀâÈù »óÅÂ·Î ¸ó½ºÅÍ °ø°İÀ» ¹Ş¾ÒÀ»¶§ ¿òÁ÷ÀÓ ÄÚµå
+                // í”Œë ˆì´ì–´í•œí…Œ ì¡íŒ ìƒíƒœë¡œ ëª¬ìŠ¤í„° ê³µê²©ì„ ë°›ì•˜ì„ë•Œ ì›€ì§ì„ ì½”ë“œ
                 break;
 
             case CatState.GoalReached:
-                // ¸ñÇ¥ ´Ş¼º½Ã È­¸é ÀüÈ­ ¹× ¸ñÇ¥ ´Ş¼º Ã¢ ¶ç¿ì´Â°Å
+                // ëª©í‘œ ë‹¬ì„±ì‹œ í™”ë©´ ì „í™” ë° ëª©í‘œ ë‹¬ì„± ì°½ ë„ìš°ëŠ”ê±°
                 break;
         }
 
@@ -232,7 +232,7 @@ public class CatAiController : MonoBehaviour
 
     private void EnterFlee()
     {
-        preState = CatState.Wander; // ÀÓ½Ã Wander, Idle, Wander µÑÁß ÇÏ³ª °í¸£°Ô ¼öÁ¤
+        preState = CatState.Wander; // ì„ì‹œ Wander, Idle, Wander ë‘˜ì¤‘ í•˜ë‚˜ ê³ ë¥´ê²Œ ìˆ˜ì •
         currentState = CatState.Flee;
         catFleeTimer = catFleeTime;
         fleeRecalTimer = 0f;
@@ -244,7 +244,7 @@ public class CatAiController : MonoBehaviour
         currentState = preState;
     }
 
-    private bool DetectMonsters() // ¸ó½ºÅÍ¸¦ °¨ÁöÇß´ÂÁö ¾Æ´ÑÁö¸¦ true / false ·Î
+    private bool DetectMonsters() // ëª¬ìŠ¤í„°ë¥¼ ê°ì§€í–ˆëŠ”ì§€ ì•„ë‹Œì§€ë¥¼ true / false ë¡œ
     {
         foreach (GameObject monster in monsters)
         {
@@ -266,7 +266,7 @@ public class CatAiController : MonoBehaviour
     {
         Vector2 fleeDir = Vector2.zero;
 
-        // ¸®½ºÆ® ºñ¾î ÀÖÀ»¶§
+        // ë¦¬ìŠ¤íŠ¸ ë¹„ì–´ ìˆì„ë•Œ
         if (monsters == null || monsters.Count == 0)
         {
             return lastFleeDir != Vector2.zero ? lastFleeDir : (Vector2)UnityEngine.Random.insideUnitCircle.normalized;
@@ -283,13 +283,13 @@ public class CatAiController : MonoBehaviour
             if (distance < catDetectRadius)
             {
                 Vector2 away = (rb.position - monsterPos).normalized;
-                // ³Ê¹« °¡±î¿ì¸é °¡ÁßÄ¡(±ÙÃ³ÀÏ¼ö·Ï °­ÇÏ°Ô) ???
+                // ë„ˆë¬´ ê°€ê¹Œìš°ë©´ ê°€ì¤‘ì¹˜(ê·¼ì²˜ì¼ìˆ˜ë¡ ê°•í•˜ê²Œ) ???
                 float w = Mathf.Clamp01(1f - distance / catDetectRadius);
                 fleeDir += away * (0.5f + w);
             }
         }
 
-        // ¿ÏÀü 0ÀÌ¸é ¸¶Áö¸· ¹æÇâ À¯Áö(Á¤Áö ¹æÁö)
+        // ì™„ì „ 0ì´ë©´ ë§ˆì§€ë§‰ ë°©í–¥ ìœ ì§€(ì •ì§€ ë°©ì§€)
         if (fleeDir == Vector2.zero)
             return lastFleeDir != Vector2.zero ? lastFleeDir : (Vector2)UnityEngine.Random.insideUnitCircle.normalized;
 
