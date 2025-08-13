@@ -1,7 +1,8 @@
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Player : MonoBehaviour
+public class Player : NetworkBehaviour
 {
     public Vector2 inputVec;
     public float speed;
@@ -20,12 +21,14 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (!IsOwner) return;
         Vector2 nextVec = inputVec * speed * Time.fixedDeltaTime;
         // 위치이동
         rigid.MovePosition(rigid.position + nextVec);
     }
     void OnMove(InputValue value)
     {
+        if (!IsOwner) return;
         inputVec = value.Get<Vector2>();
     }
 }

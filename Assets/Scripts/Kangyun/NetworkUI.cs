@@ -1,5 +1,6 @@
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class NetworkUI : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class NetworkUI : MonoBehaviour
     public void StartClient()
     {
         NetworkManager.Singleton.StartClient();
+
+
+        NetworkManager.Singleton.SceneManager.LoadScene("SampleScene", LoadSceneMode.Single);
     }
 
     public void StartServer()
