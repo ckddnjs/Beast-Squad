@@ -7,11 +7,16 @@ public class Player : MonoBehaviour
     public float speed;
 
     Rigidbody2D rigid;
+    SpriteRenderer spriter;
+    Animator ani;
 
     // 처음 한번만 
     void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
+        spriter = GetComponent<SpriteRenderer>();
+        ani = GetComponent<Animator>();
+
     }
     void Start()
     {
@@ -23,6 +28,16 @@ public class Player : MonoBehaviour
         Vector2 nextVec = inputVec * speed * Time.fixedDeltaTime;
         // 위치이동
         rigid.MovePosition(rigid.position + nextVec);
+    }
+
+    void LateUpdate()
+    {
+        ani.SetFloat("speed", inputVec.magnitude);
+
+        if(inputVec.x != 0)
+        {
+            spriter.flipX = inputVec.x < 0 ? true : false;
+        }
     }
     void OnMove(InputValue value)
     {
