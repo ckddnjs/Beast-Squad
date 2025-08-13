@@ -20,6 +20,9 @@ public class CatAiController : MonoBehaviour
     public float catFleeTime;
     private float catFleeTimer;
     private Vector2 lastFleeDir;
+    SpriteRenderer sprite;
+    Animator ani;
+
 
     private bool isFollowingplayStick = false;
     private float fleeRecalTimer;
@@ -54,15 +57,17 @@ public class CatAiController : MonoBehaviour
     public float checkingIsStickDelay;
     public float fleeRecalcInterval;
 
-
     private CatState preState;
     private float startMoveTimer = 0f;
     private float checkingStickDelayTimer = 0f;
+
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         EnterStartMove();
+        sprite = GetComponent<SpriteRenderer>();
+        ani = GetComponent<Animator>();
     }
 
     void Update()
@@ -185,6 +190,22 @@ public class CatAiController : MonoBehaviour
                 break;
 
         }
+    }
+
+    void LateUpdate()
+    {
+        bool isRunning = false;
+
+        if(currentState == CatState.StartMove || currentState == CatState.Flee || currentState == CatState.ToPlayer)
+        {
+            isRunning = true;
+        }
+
+        ani.SetBool("catRun", isRunning);
+
+        
+
+
     }
 
     private void EnterStartMove()
