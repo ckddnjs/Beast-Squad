@@ -31,7 +31,7 @@ public class Player : NetworkBehaviour
         // 위치이동
         rigid.MovePosition(rigid.position + nextVec);
     }
-
+    /*
     void LateUpdate()
     {
         if (!IsOwner) return;
@@ -41,7 +41,7 @@ public class Player : NetworkBehaviour
         {
             spriter.flipX = inputVec.x < 0 ? true : false;
         }
-    }
+    }*/
     void OnMove(InputValue value)
     {
         if (!IsOwner) return;
