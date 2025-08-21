@@ -589,8 +589,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -524.5, y: -276.5}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: -808.3841, y: -495.40247}
+  m_SizeDelta: {x: 303.2318, y: 81.9951}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &950352916
 MonoBehaviour:
@@ -722,8 +722,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -524.5, y: -248.1}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: -808.3841, y: -417.7804}
+  m_SizeDelta: {x: 303.2318, y: 81.9951}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1081337749
 MonoBehaviour:
@@ -935,7 +935,7 @@ MonoBehaviour:
   NetworkConfig:
     ProtocolVersion: 0
     NetworkTransport: {fileID: 2039970000}
-    PlayerPrefab: {fileID: 1587451354900579196, guid: 04df2fdd4ace3e541819e3ff162ce335, type: 3}
+    PlayerPrefab: {fileID: 6095964682605611460, guid: 04df2fdd4ace3e541819e3ff162ce335, type: 3}
     Prefabs:
       NetworkPrefabsLists:
       - {fileID: 11400000, guid: 97df75c3bf7e46749b09e65d019c0c90, type: 2}
